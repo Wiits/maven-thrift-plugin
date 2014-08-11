@@ -31,6 +31,7 @@ import java.util.Set;
 final class Thrift {
 
     final static String GENERATED_JAVA = "gen-java";
+    final static String GENERATED_JAVA_BEANS = "gen-javabean";
 
     private final String executable;
     private final String generator;
@@ -112,6 +113,9 @@ final class Thrift {
 
     private void moveGeneratedFiles() {
         File genDir = new File(javaOutputDirectory, GENERATED_JAVA);
+        if (!genDir.exists()) {
+            genDir = new File(javaOutputDirectory, GENERATED_JAVA_BEANS);
+        }
         final File[] generatedFiles = genDir.listFiles();
         for (File generatedFile : generatedFiles) {
             final String filename = generatedFile.getName();
